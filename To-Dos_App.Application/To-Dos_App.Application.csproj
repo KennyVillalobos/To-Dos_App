@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\To-Dos_App.Core\To-Dos_App.Core.csproj" />
+    <ProjectReference Include="..\To-Dos_App.Infraestructure\To-Dos_App.Infraestructure.csproj" />
+  </ItemGroup>
+
 </Project>
