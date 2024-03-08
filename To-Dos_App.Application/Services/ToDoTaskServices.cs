@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,8 @@ namespace To_Dos_App.Application.Services
 {
     public class ToDoTaskServices : IToDoTaskServices
     {
-        private readonly ToDoTaskRepository _taskRepo;
-        public ToDoTaskServices(ToDoTaskRepository taskRepo)
+        private readonly IToDoTaskRepository _taskRepo;
+        public ToDoTaskServices(IToDoTaskRepository taskRepo)
         {
             _taskRepo = taskRepo;
         }
@@ -31,14 +32,28 @@ namespace To_Dos_App.Application.Services
             return result;
         }
 
-        public Task<Result<bool, Error>> EditTaskMessage(Guid Id, string message)
+        public async Task<Result<bool, Error>> EditTaskMessage(Guid Id, string message)
         {
-            throw new NotImplementedException();
+            var result = await _taskRepo.GetTask(Id);
+            if (result._isSuccess)
+            {
+                var task = result.Value;
+                if (!task.Completed)
+                {
+                    task.TaskMessage = message;
+                    await _taskRepo.UpdateTask(Id, task);
+                    return true;
+                }
+                return new Error("To-Do task already marked as finished", StatusCodes.Status400BadRequest);
+            }
+            else
+                return result.Error;
         }
 
-        public Task<Result<List<ToDoTask>, Error>> GetAll()
+        public async Task<Result<List<ToDoTask>, Error>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await _taskRepo.GetAllTasks();
+            return result;
         }
 
         public Task<Result<List<ToDoTask>, Error>> GetAllCompleted()
@@ -61,9 +76,22 @@ namespace To_Dos_App.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Result<bool, Error>> MarkCompleteTask(Guid Id)
+        public async Task<Result<bool, Error>> MarkCompleteTask(Guid Id)
         {
-            throw new NotImplementedException();
+            var result = await _taskRepo.GetTask(Id);
+            if (result._isSuccess)
+            {
+                var task = result.Value;
+                if (!task.Completed)
+                {
+                    task.Completed = true;
+                    task.FinishDate = DateTime.Now;
+                    await _taskRepo.UpdateTask(Id, task);
+                }
+                return true;
+            }
+            else
+            return result.Error;
         }
     }
 }

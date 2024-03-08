@@ -19,6 +19,28 @@ namespace To_Dos_App.Infraestructure.Repositories
         {
             _dataContext = dataContext;
         }
+        public async Task<Result<ToDoTask, Error>> GetTask(Guid Id)
+        {
+            ToDoTask task = await _dataContext.ToDoTasks.FirstOrDefaultAsync(t => t.Id == Id);
+            if (task is null)
+            {
+                return new Error("Task not Found", StatusCodes.Status404NotFound);
+            }
+            return task;
+        }
+        public async Task<Result<List<ToDoTask>, Error>> GetAllTasks()
+        {
+            try
+            {
+                List<ToDoTask> toDoTasks = await _dataContext.ToDoTasks.ToListAsync();
+                return toDoTasks;
+            }
+            catch
+            {
+                return new Error("Repository Error", 500);
+            }
+
+        }
         public async Task<Result<bool,Error>> AddToDoTaskAsync(ToDoTask task)
         {
             try
@@ -43,6 +65,26 @@ namespace To_Dos_App.Infraestructure.Repositories
             try
             {
                 _dataContext.ToDoTasks.Remove(task);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return new Error("Repository Error", 500);
+            }
+        }
+        public async Task<Result<bool, Error>> UpdateTask(Guid Id, ToDoTask updatedTask)
+        {
+            ToDoTask task = await _dataContext.ToDoTasks.FirstOrDefaultAsync(t => t.Id == Id);
+            if (task is null)
+            {
+                return new Error("Task not Found", StatusCodes.Status404NotFound);
+            }
+            try
+            {
+                task.TaskMessage = updatedTask.TaskMessage;
+                task.Completed = updatedTask.Completed;
+                task.FinishDate = updatedTask.FinishDate;
                 await _dataContext.SaveChangesAsync();
                 return true;
             }
@@ -91,39 +133,7 @@ namespace To_Dos_App.Infraestructure.Repositories
             }
         }
 
-        public async Task<Result<List<ToDoTask>, Error>> GetAllTasks()
-        {
-            try
-            {
-                List<ToDoTask> toDoTasks = await _dataContext.ToDoTasks.ToListAsync();
-                return toDoTasks;
-            }
-            catch
-            {
-                return new Error("Repository Error", 500);
-            }
 
-        }
 
-        public async Task<Result<bool, Error>> UpdateTask(Guid Id, ToDoTask updatedTask)
-        {
-            ToDoTask task = await _dataContext.ToDoTasks.FirstOrDefaultAsync(t => t.Id == Id);
-            if (task is null)
-            {
-                return new Error("Task not Found", StatusCodes.Status404NotFound);
-            }
-            try
-            {
-                task.TaskMessage = updatedTask.TaskMessage;
-                task.Completed = updatedTask.Completed;
-                task.FinishDate = updatedTask.FinishDate;
-                await _dataContext.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return new Error("Repository Error", 500);
-            }
-        }
     }
 }

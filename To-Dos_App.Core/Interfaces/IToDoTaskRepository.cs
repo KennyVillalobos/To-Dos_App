@@ -11,6 +11,8 @@ namespace To_Dos_App.Core.Interfaces
     public interface IToDoTaskRepository
     {
         Task<Result<List<ToDoTask>,Error>> GetAllTasks();
+        Task<Result<ToDoTask, Error>> GetTask(Guid Id);
+
         Task<Result<bool, Error>> UpdateTask(Guid Id, ToDoTask updatedTask);
         Task<Result<bool,Error>> DeleteTask(Guid Id);
         Task<Result<List<ToDoTask>, Error>> GetAllFilterTasks(Func<ToDoTask, bool> filter);

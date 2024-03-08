@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using To_Dos_App.Application.Services;
+using To_Dos_App.Core.Interfaces;
 using To_Dos_App.Infraestructure.Data;
+using To_Dos_App.Infraestructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +14,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
+//Adding Db Services
 builder.Services.AddDbContext<DataContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddScoped<IToDoTaskServices, ToDoTaskServices>();
+builder.Services.AddScoped<IToDoTaskRepository, ToDoTaskRepository>();
 
 
 var app = builder.Build();
