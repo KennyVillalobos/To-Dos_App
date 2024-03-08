@@ -36,7 +36,7 @@ namespace To_Dos_App.API.Controllers
                 return StatusCode(result.Error.statusCode, result.Error.message);
         }
         [HttpGet]
-        public async Task<ActionResult> GetCompleteTaskList()
+        public async Task<ActionResult> GetTaskList()
         {
             var result = await _todoTaskService.GetAll();
             if (result._isSuccess)
@@ -47,6 +47,49 @@ namespace To_Dos_App.API.Controllers
             }
             else return StatusCode(result.Error.statusCode, result.Error.message);
         }
+
+        [HttpGet]
+        [Route("{completed}")]
+        public async Task<ActionResult> GetCompleteTaskList(bool completed)
+        {
+            var result = await _todoTaskService.GetAllCompleted(completed);
+            if (result._isSuccess)
+            {
+                var list = result.Value;
+                list.Sort(new ToDoTaskComparer());
+                return Ok(list);
+            }
+            else return StatusCode(result.Error.statusCode, result.Error.message);
+        }
+
+        [HttpGet]
+        [Route("containing")]
+        public async Task<ActionResult> GetCompleteTaskListContaining(string substring)
+        {
+            var result = await _todoTaskService.GetAll(substring);
+            if (result._isSuccess)
+            {
+                var list = result.Value;
+                list.Sort(new ToDoTaskComparer());
+                return Ok(list);
+            }
+            else return StatusCode(result.Error.statusCode, result.Error.message);
+        }
+
+        [HttpGet]
+        [Route("containing/{completed}")]
+        public async Task<ActionResult> GetCompleteTaskListContaining(string substring, bool completed)
+        {
+            var result = await _todoTaskService.GetAllCompleted(completed,substring);
+            if (result._isSuccess)
+            {
+                var list = result.Value;
+                list.Sort(new ToDoTaskComparer());
+                return Ok(list);
+            }
+            else return StatusCode(result.Error.statusCode, result.Error.message);
+        }
+
 
         [HttpPut]
         [Route("mark/{id}")]

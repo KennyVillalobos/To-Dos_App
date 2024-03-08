@@ -55,26 +55,24 @@ namespace To_Dos_App.Application.Services
             var result = await _taskRepo.GetAllTasks();
             return result;
         }
-
-        public Task<Result<List<ToDoTask>, Error>> GetAllCompleted()
+        public async Task<Result<List<ToDoTask>, Error>> GetAll(string substring)
         {
-            throw new NotImplementedException();
+            var result = await _taskRepo.GetAllTaskContaining(substring);
+            return result;
+        }
+        public async Task<Result<List<ToDoTask>, Error>> GetAllCompleted(bool completed)
+        {
+            var result = await _taskRepo.GetAllFilterTasks(t => t.Completed == completed);
+            return result;
         }
 
-        public Task<Result<List<ToDoTask>, Error>> GetAllCompleted(string substring)
+
+        public async Task<Result<List<ToDoTask>, Error>> GetAllCompleted(bool completed, string substring)
         {
-            throw new NotImplementedException();
+            var result = await _taskRepo.GetAllFilterTaskContaining(t => t.Completed == completed, substring);
+            return result;
         }
 
-        public Task<Result<List<ToDoTask>, Error>> GetAllIncompleted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<List<ToDoTask>, Error>> GetAllIncompleted(string substring)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Result<bool, Error>> MarkCompleteTask(Guid Id)
         {
