@@ -105,9 +105,9 @@ namespace To_Dos_App.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> UpdateToDoMessage(Guid id, string message)
+        public async Task<ActionResult> UpdateToDoMessage(Guid id, string taskMessage)
         {
-            var result = await _todoTaskService.EditTaskMessage(id,message);
+            var result = await _todoTaskService.EditTaskMessage(id,taskMessage);
             if (result._isSuccess)
             {
                 return Ok();

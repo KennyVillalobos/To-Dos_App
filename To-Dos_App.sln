@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "To-Dos_App.API", "To-Dos_App.API\To-Dos_App.API.csproj", "{F582FD2F-DD46-44B5-A2FC-FC098B33BBE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.API", "To-Dos_App.API\To-Dos_App.API.csproj", "{F582FD2F-DD46-44B5-A2FC-FC098B33BBE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "To-Dos_App.Core", "To-Dos_App.Core\To-Dos_App.Core.csproj", "{7A9D6018-4A84-422C-BE33-7ECF2765311B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.Core", "To-Dos_App.Core\To-Dos_App.Core.csproj", "{7A9D6018-4A84-422C-BE33-7ECF2765311B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "To-Dos_App.Infraestructure", "To-Dos_App.Infraestructure\To-Dos_App.Infraestructure.csproj", "{05EE629A-19DC-4327-83FD-8019CF778763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.Infraestructure", "To-Dos_App.Infraestructure\To-Dos_App.Infraestructure.csproj", "{05EE629A-19DC-4327-83FD-8019CF778763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "To-Dos_App.Application", "To-Dos_App.Application\To-Dos_App.Application.csproj", "{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.Application", "To-Dos_App.Application\To-Dos_App.Application.csproj", "{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "testfull.client", "To-Dos_App.UI\testfull.client.esproj", "{D050F9FD-84B7-4F91-8358-8A284ED33D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D050F9FD-84B7-4F91-8358-8A284ED33D13}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
