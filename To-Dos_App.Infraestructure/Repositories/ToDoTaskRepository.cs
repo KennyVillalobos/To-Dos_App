@@ -41,6 +41,19 @@ namespace To_Dos_App.Infraestructure.Repositories
             }
 
         }
+
+        public async Task<Result<int,Error>> GetToDoTasksLenght()
+        {
+            try
+            {
+                int toDoTasks = await _dataContext.ToDoTasks.CountAsync();
+                return toDoTasks;
+            }
+            catch
+            {
+                return new Error("Repository Error", 500);
+            }
+        }
         public async Task<Result<bool,Error>> AddToDoTaskAsync(ToDoTask task)
         {
             try
@@ -124,7 +137,7 @@ namespace To_Dos_App.Infraestructure.Repositories
         {
             try
             {
-                List<ToDoTask> toDoTasks = _dataContext.ToDoTasks.Where(filter).Where(td => td.TaskMessage.Contains(substring)).ToList();
+                List<ToDoTask> toDoTasks = _dataContext.ToDoTasks.Where(td => td.TaskMessage.Contains(substring)).Where(filter).ToList();
                 return toDoTasks;
             }
             catch

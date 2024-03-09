@@ -14,6 +14,7 @@ namespace To_Dos_App.Core.Interfaces
         Task<Result<bool, Error>> MarkCompleteTask(Guid Id);
         Task<Result<bool, Error>> EditTaskMessage(Guid Id, string message);
         Task<Result<List<ToDoTask>, Error>> GetAll();
+        Task<Result<int, Error>> GetToDoTasksLenght();
         Task<Result<List<ToDoTask>, Error>> GetAll(string substring);
         Task<Result<List<ToDoTask>, Error>> GetAllCompleted(bool completed);
         Task<Result<List<ToDoTask>, Error>> GetAllCompleted(bool completed, string substring);

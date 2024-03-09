@@ -41,9 +41,26 @@ namespace To_Dos_App.API.Controllers
             var result = await _todoTaskService.GetAll();
             if (result._isSuccess)
             {
-            var list = result.Value;
-                list.Sort(new ToDoTaskComparer());
+                var initialList = result.Value.ToList();
+                initialList.Sort(new ToDoTaskComparer());
+                var list = initialList.Select(t => { 
+                var toDoTaskDTOResponse = _mapper.Map<ToDoTaskDTOResponse>(t);
+                toDoTaskDTOResponse.FinishDate = t.FinishDate.ToString();
+                toDoTaskDTOResponse.CreationDateTime = t.CreationDateTime.ToString();
+                return toDoTaskDTOResponse;
+            });
                 return Ok(list);
+            }
+            else return StatusCode(result.Error.statusCode, result.Error.message);
+        }
+        [HttpGet]
+        [Route("Count")]
+        public async Task<ActionResult> GetTaskListCount()
+        {
+            var result = await _todoTaskService.GetToDoTasksLenght();
+            if (result._isSuccess)
+            {
+                return Ok(result.Value);
             }
             else return StatusCode(result.Error.statusCode, result.Error.message);
         }
@@ -55,9 +72,18 @@ namespace To_Dos_App.API.Controllers
             var result = await _todoTaskService.GetAllCompleted(completed);
             if (result._isSuccess)
             {
-                var list = result.Value;
-                list.Sort(new ToDoTaskComparer());
-                return Ok(list);
+                var initialList = result.Value.ToList();
+                initialList.Sort(new ToDoTaskComparer());
+                var list = initialList.Select(t =>
+                {
+                    var toDoTaskDTOResponse = _mapper.Map<ToDoTaskDTOResponse>(t);
+                    toDoTaskDTOResponse.FinishDate = t.FinishDate.ToString();
+                    toDoTaskDTOResponse.CreationDateTime = t.CreationDateTime.ToString();
+                    return toDoTaskDTOResponse;
+                });
+
+
+                    return Ok(list);
             }
             else return StatusCode(result.Error.statusCode, result.Error.message);
         }
@@ -69,8 +95,15 @@ namespace To_Dos_App.API.Controllers
             var result = await _todoTaskService.GetAll(substring);
             if (result._isSuccess)
             {
-                var list = result.Value;
-                list.Sort(new ToDoTaskComparer());
+                var initialList = result.Value;
+                initialList.Sort(new ToDoTaskComparer());
+                var list = initialList.Select(t =>
+                {
+                    var toDoTaskDTOResponse = _mapper.Map<ToDoTaskDTOResponse>(t);
+                    toDoTaskDTOResponse.FinishDate = t.FinishDate.ToString();
+                    toDoTaskDTOResponse.CreationDateTime = t.CreationDateTime.ToString();
+                    return toDoTaskDTOResponse;
+                });
                 return Ok(list);
             }
             else return StatusCode(result.Error.statusCode, result.Error.message);
@@ -83,8 +116,16 @@ namespace To_Dos_App.API.Controllers
             var result = await _todoTaskService.GetAllCompleted(completed,substring);
             if (result._isSuccess)
             {
-                var list = result.Value;
-                list.Sort(new ToDoTaskComparer());
+                var initialList = result.Value;
+                initialList.Sort(new ToDoTaskComparer());
+                var list = initialList.Select(t =>
+                {
+                    var toDoTaskDTOResponse = _mapper.Map<ToDoTaskDTOResponse>(t);
+                    toDoTaskDTOResponse.FinishDate = t.FinishDate.ToString();
+                    toDoTaskDTOResponse.CreationDateTime = t.CreationDateTime.ToString();
+                    return toDoTaskDTOResponse;
+                });
+
                 return Ok(list);
             }
             else return StatusCode(result.Error.statusCode, result.Error.message);

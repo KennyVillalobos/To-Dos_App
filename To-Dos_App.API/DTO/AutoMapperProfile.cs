@@ -8,6 +8,7 @@ namespace To_Dos_App.API.DTO
         public AutoMapperProfile()
         {
             CreateMap<ToDoTaskDTO, ToDoTask>();
+            CreateMap<ToDoTask, ToDoTaskDTOResponse>();
         }
     }
 }
