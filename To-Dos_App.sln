@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.Infraestructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "To-Dos_App.Application", "To-Dos_App.Application\To-Dos_App.Application.csproj", "{5436CBF7-EE7D-42EE-BCA8-47F5F3F2E3E2}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "testfull.client", "To-Dos_App.UI\testfull.client.esproj", "{D050F9FD-84B7-4F91-8358-8A284ED33D13}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "To-Dos_App.UI", "To-Dos_App.UI\To-Dos_App.UI.esproj", "{D050F9FD-84B7-4F91-8358-8A284ED33D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
