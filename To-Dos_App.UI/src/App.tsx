@@ -8,10 +8,11 @@ import { Header } from "./components/Header"
 //let false_todos=[
 //]
 
+
 const App = (): JSX.Element => {
     const [todos, setTodos] = useState<ListOfTodos>([])
 
-    const [filterSelected, setFilterSelected] = useState<FILTERS_VALUE>(TODO_FILTERS.ALL)
+  const [filterSelected, setFilterSelected] = useState<FILTERS_VALUE>(TODO_FILTERS.ALL)
 
     useEffect(() => {
         populateList()
@@ -38,12 +39,12 @@ const App = (): JSX.Element => {
              response = await fetch('api/todotask', requestOptions)
           }
 
-      
+
 
 
          //const response = await fetch('api/todotask', requestOptions)
-         const data = await response.json()
-         setTodos(data)
+    const data = await response.json()
+    setTodos(data)
   }
 
     async function handleRemove({ id }: TodoId) {
@@ -74,7 +75,7 @@ const App = (): JSX.Element => {
   }
 
   async function handleFilterChange (filter: FILTERS_VALUE) {
-      setFilterSelected(filter)
+    setFilterSelected(filter)
       populateList()
   }
 
@@ -98,7 +99,7 @@ const App = (): JSX.Element => {
             method: 'POST',
             body: JSON.stringify(messageJSON),
             headers: headers
-        }
+    }
     //const newTodo = {
     //    taskMessage,
     //  id: crypto.randomUUID(),
@@ -110,6 +111,8 @@ const App = (): JSX.Element => {
         const response = await fetch(`/api/todotask`, requestOptions)
         populateList()
 
+    const newTodos = [...todos, newTodo]
+    setTodos(newTodos)
   }
 
     async function handleUpdateTitle ({ id, taskMessage }: Pick<TodoType, 'id' | 'taskMessage'>) {
