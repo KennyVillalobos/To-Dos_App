@@ -18,11 +18,13 @@ const App = (): JSX.Element => {
 
     const [substring, setSubstring] = useState<string>("")
 
+    const [todosCount, setTodosCount] = useState(0)
+
     useEffect(() => {
         populateList()
 
     }, [filterSelected, substring]);
-
+    useEffect(() => { setCount() }, []);
 
     async function populateList() {
         let response;
@@ -70,9 +72,10 @@ const App = (): JSX.Element => {
         }
         const response = await fetch(`api/todotask/${id}`, requestOptions)
         populateList()
+        setCount()
     }
 
-    async function handleCompleted({ id, completed }: Pick<TodoType, 'id' | 'completed'>) {
+    async function handleCompleted({ id }: Pick<TodoType, 'id'>) {
         const requestOptions: RequestInit = {
             method: 'PUT'
         }
@@ -95,8 +98,6 @@ const App = (): JSX.Element => {
         setFilterSelected(filter)
     }
 
-    const activeCount = todos.filter(todo => !todo.completed).length
-    const completedCount = todos.length - activeCount
 
     //const filteredTodos = todos.filter(todo => {
     //  if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed
@@ -126,6 +127,7 @@ const App = (): JSX.Element => {
         //setTodos(newTodos)
         const response = await fetch(`/api/todotask`, requestOptions)
         populateList()
+        setCount()
 
         //const newTodos = [...todos, newTodo]
         //setTodos(newTodos)
@@ -154,6 +156,12 @@ const App = (): JSX.Element => {
         setSubstring(taskMessage)
     }
 
+    async function setCount() {
+        const response = await fetch(`api/todotask/Count`)
+        const data = await response.json()
+        setTodosCount(data)
+    }
+
   return (
     <div className="todoapp">
       <Header onAddTodo={handleAddTodo}/>
@@ -165,8 +173,7 @@ const App = (): JSX.Element => {
         todo={todos}
       />
       <Footer
-        activeCount={activeCount}
-        completedCount={completedCount}
+              count={todosCount}
         filterSelected={filterSelected}
         onCreateTodo={() =>{}}
         handleFilterChange={handleFilterChange}

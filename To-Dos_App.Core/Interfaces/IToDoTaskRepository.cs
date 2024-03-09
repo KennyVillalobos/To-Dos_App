@@ -11,6 +11,7 @@ namespace To_Dos_App.Core.Interfaces
     public interface IToDoTaskRepository
     {
         Task<Result<List<ToDoTask>,Error>> GetAllTasks();
+        Task<Result<int, Error>> GetToDoTasksLenght();
         Task<Result<ToDoTask, Error>> GetTask(Guid Id);
 
         Task<Result<bool, Error>> UpdateTask(Guid Id, ToDoTask updatedTask);

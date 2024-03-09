@@ -73,6 +73,11 @@ namespace To_Dos_App.Application.Services
             return result;
         }
 
+        public async Task<Result<int, Error>> GetToDoTasksLenght()
+        {
+            var result = await _taskRepo.GetToDoTasksLenght();
+            return result;
+        }
 
         public async Task<Result<bool, Error>> MarkCompleteTask(Guid Id)
         {
