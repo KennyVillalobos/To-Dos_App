@@ -13,7 +13,6 @@ export const SearchTodo: React.FC<Props> = ({ queryTodo }) => {
     const handleSubmit = (event: React.FormEvent<HTMLInputElement>): void => {
         event.preventDefault()
         queryTodo({ taskMessage: inputValue })
-        setInputValue('')
     }
 
     return (
