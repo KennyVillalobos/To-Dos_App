@@ -10,5 +10,6 @@ Asegúrate de tener instalado lo siguiente:
 # Iniciar el servidor de la UI
 1. Se debe configurar el archivo vit.config utilizando como target del proxy en las configuraciones del server el proveido por el servidor levantado.
 2. Se debe ejecutar una terminal en la dirección del proyecto *To-Dos_App.UI*.
-3. Ejecutar en la terminal el comando: npm run dev.
-4. Abrir en el navegador la dirección proveída en la terminal.
+3. Ejecutar en la terminal el comando npm install todomvc-app-css.
+5. Ejecutar en la terminal el comando: npm run dev.
+6. Abrir en el navegador la dirección proveída en la terminal.
